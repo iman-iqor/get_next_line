@@ -89,6 +89,7 @@ char *get_next_line(int fd)
 		if (fined_nl(buff,'\n'))
 			break ;
     }
+	free(buff);
     if (!save)
         return NULL;
     line = ft_extract_line(save);
