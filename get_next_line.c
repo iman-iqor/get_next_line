@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 20:55:36 by imiqor            #+#    #+#             */
-/*   Updated: 2024/11/29 21:08:37 by imiqor           ###   ########.fr       */
+/*   Updated: 2024/11/29 22:49:39 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,9 @@ char	*clean_save(char *buff)
 	return (str);
 }
 
-char	*get_next_line(int fd)
+char *read_from_file(char *save,int fd)
 {
-	static char	*save;
 	char		*buff;
-	char		*line;
 	ssize_t		readed;
 
 	readed = 1;
@@ -86,28 +84,39 @@ char	*get_next_line(int fd)
 		buff[readed] = '\0';
 		save = ft_strjoin(save, buff);
 	}
+	free(buff);
+	return (save);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*save;
+	char		*line;
+	
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	save = read_from_file(save, fd);
 	if (!save)
 		return (NULL);
 	line = ft_extract_line(save);
 	save = clean_save(save);
 	if (!line)
-		free(buff);
+		free(save);
 	return (line);
 }
 
-int	main(void)
-{
-	int		fd1;
-	char	*s;
+// int	main(void)
+// {
+// 	int		fd1;
+// 	char	*s;
 
-	fd1 = open("txt1.txt", O_RDONLY);
-	s = get_next_line(fd1);
-	while (1)
-	{
-		s = get_next_line(fd1);
-		if (!s)
-			break ;
-		printf("%s", s);
-		free(s);
-	}
-}
+// 	fd1 = open("txt1.txt", O_RDONLY);
+// 	while (1)
+// 	{
+// 		s = get_next_line(fd1);
+// 		if (!s)
+// 			break ;
+// 		printf("%s", s);
+// 		free(s);
+// 	}
+// }

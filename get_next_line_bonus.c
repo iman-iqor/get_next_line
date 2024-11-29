@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 20:54:57 by imiqor            #+#    #+#             */
-/*   Updated: 2024/11/29 20:56:17 by imiqor           ###   ########.fr       */
+/*   Updated: 2024/11/29 22:46:31 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,12 @@ char *clean_buffer(char *buff)
 	return (str);
 }
 
-char *get_next_line(int fd)
+char* read_from_file(char *save,int fd)
 {
-	static char *save[1024];
+	int readed;
 	char *buff;
-	char *line;
 
-	int readed = 1;
+	readed = 1;
 	buff = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
 	while (readed != 0)
 	{
@@ -83,30 +82,62 @@ char *get_next_line(int fd)
 			return NULL;
 		}
 		buff[readed] = '\0';
-		save[fd] = ft_strjoin(save[fd], buff);
+		save = ft_strjoin(save, buff);
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
+	free(buff);
+	return save;
+}
+
+char *get_next_line(int fd)
+{
+	static char *save[1024];
+	char *line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
+		return (NULL);
+	save[fd] = read_from_file(save[fd],fd);
 	if (!save[fd])
 		return NULL;
 	line = ft_extract_line(save[fd]);
 	save[fd] = clean_buffer(save[fd]);
 	if (!line)
-		free(buff);
+		free(save[fd]);
 	return line;
 }
 
-int main()
-{
-	int fd1 = open("txt1.txt", O_RDONLY);
-	char *s;
-	// s = get_next_line(fd1);
-	while (1)
-	{
-		s = get_next_line(fd1);
-		if (!s)
-			break;
-		printf("%s", s);
-		free(s);
-	}
-}
+// int main()
+// {
+// 	int fd1 = open("txt1.txt", O_RDONLY);
+// 	int fd2 = open("txt2.txt", O_RDONLY);
+// 	char *s;
+// 	char *s2;
+// 	s =get_next_line(fd1);
+// 	if (s)
+// 		printf("%s",s);
+// 	s2 = get_next_line(fd2);
+// 	if (s2)
+// 		printf("%s",s2);
+// 	s =get_next_line(fd1);
+// 	if (s)
+// 		printf("%s",s);
+// 	s2 = get_next_line(fd2);
+// 	if (s2)
+// 		printf("%s",s2);
+// 	s = get_next_line(fd1);
+// 	if (s)
+// 		printf("%s",s);
+// 	s2 = get_next_line(fd2);
+// 	if (s2)
+// 		printf("%s",s2);
+// 	s = get_next_line(fd1);
+// 	if (s)
+// 		printf("%s",s);
+// 	s = get_next_line(fd1);
+// 	if (s)
+// 		printf("%s",s);
+// 	s = get_next_line(fd1);
+// 	if (s)
+// 		printf("%s",s);
+// }
