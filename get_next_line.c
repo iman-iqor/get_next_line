@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 20:55:36 by imiqor            #+#    #+#             */
+/*   Updated: 2024/11/29 21:08:37 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char *ft_extract_line(char *str)
+char	*ft_extract_line(char *str)
 {
-    char	*line;
-	int 	i;
+	char	*line;
+	int		i;
 
 	i = 0;
 	if (!str || !str[i])
@@ -27,7 +39,7 @@ char *ft_extract_line(char *str)
 	return (line);
 }
 
-char *clean_save(char *buff)
+char	*clean_save(char *buff)
 {
 	int		i;
 	int		j;
@@ -54,46 +66,48 @@ char *clean_save(char *buff)
 	return (str);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    static char *save;
-    char *buff;
-    char *line;
+	static char	*save;
+	char		*buff;
+	char		*line;
+	ssize_t		readed;
 
-    ssize_t readed = 1;
+	readed = 1;
 	buff = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
-    while (readed > 0)
-    {
-		readed = read(fd,buff,BUFFER_SIZE);
+	while (readed > 0)
+	{
+		readed = read(fd, buff, BUFFER_SIZE);
 		if (readed == -1)
 		{
 			free(buff);
-			return NULL;
+			return (NULL);
 		}
-        buff[readed] = '\0';
-        save = ft_strjoin(save, buff);
-    }
-    if (!save)
-        return NULL;
-    line = ft_extract_line(save);
+		buff[readed] = '\0';
+		save = ft_strjoin(save, buff);
+	}
+	if (!save)
+		return (NULL);
+	line = ft_extract_line(save);
 	save = clean_save(save);
 	if (!line)
 		free(buff);
-    return line;
+	return (line);
 }
 
-int main()
+int	main(void)
 {
-    int fd1 = open("txt1.txt", O_RDONLY);
-    char *s;
-    s = get_next_line(fd1);
-    while (1)
+	int		fd1;
+	char	*s;
+
+	fd1 = open("txt1.txt", O_RDONLY);
+	s = get_next_line(fd1);
+	while (1)
 	{
 		s = get_next_line(fd1);
-        if (!s)
+		if (!s)
 			break ;
-		printf("%s",s);
+		printf("%s", s);
 		free(s);
 	}
 }
-

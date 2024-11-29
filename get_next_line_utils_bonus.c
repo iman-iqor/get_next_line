@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 20:55:53 by imiqor            #+#    #+#             */
+/*   Updated: 2024/11/29 20:56:24 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 int ft_strlen(char *s)
@@ -47,7 +59,7 @@ char *ft_strjoin(char *save, char *buff)
     if (!str)
         return NULL;
     i = 0;
-    while (save[i]&& i < ft_strlen(save))
+    while (save[i] && i < ft_strlen(save))
     {
         str[i] = save[i];
         i++;
