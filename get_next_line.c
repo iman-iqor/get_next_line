@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 20:55:36 by imiqor            #+#    #+#             */
-/*   Updated: 2024/11/29 22:49:39 by imiqor           ###   ########.fr       */
+/*   Updated: 2024/11/29 23:03:24 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char *read_from_file(char *save,int fd)
 		}
 		buff[readed] = '\0';
 		save = ft_strjoin(save, buff);
+		if (ft_strchr(buff, '\n'))
+			break;
 	}
 	free(buff);
 	return (save);
@@ -105,18 +107,3 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int	main(void)
-// {
-// 	int		fd1;
-// 	char	*s;
-
-// 	fd1 = open("txt1.txt", O_RDONLY);
-// 	while (1)
-// 	{
-// 		s = get_next_line(fd1);
-// 		if (!s)
-// 			break ;
-// 		printf("%s", s);
-// 		free(s);
-// 	}
-// }

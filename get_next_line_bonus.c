@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 20:54:57 by imiqor            #+#    #+#             */
-/*   Updated: 2024/11/29 22:46:31 by imiqor           ###   ########.fr       */
+/*   Updated: 2024/11/29 23:03:18 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,37 +107,3 @@ char *get_next_line(int fd)
 	return line;
 }
 
-// int main()
-// {
-// 	int fd1 = open("txt1.txt", O_RDONLY);
-// 	int fd2 = open("txt2.txt", O_RDONLY);
-// 	char *s;
-// 	char *s2;
-// 	s =get_next_line(fd1);
-// 	if (s)
-// 		printf("%s",s);
-// 	s2 = get_next_line(fd2);
-// 	if (s2)
-// 		printf("%s",s2);
-// 	s =get_next_line(fd1);
-// 	if (s)
-// 		printf("%s",s);
-// 	s2 = get_next_line(fd2);
-// 	if (s2)
-// 		printf("%s",s2);
-// 	s = get_next_line(fd1);
-// 	if (s)
-// 		printf("%s",s);
-// 	s2 = get_next_line(fd2);
-// 	if (s2)
-// 		printf("%s",s2);
-// 	s = get_next_line(fd1);
-// 	if (s)
-// 		printf("%s",s);
-// 	s = get_next_line(fd1);
-// 	if (s)
-// 		printf("%s",s);
-// 	s = get_next_line(fd1);
-// 	if (s)
-// 		printf("%s",s);
-// }
