@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 20:55:36 by imiqor            #+#    #+#             */
-/*   Updated: 2024/11/29 23:03:24 by imiqor           ###   ########.fr       */
+/*   Updated: 2024/11/29 23:24:02 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ char	*clean_save(char *buff)
 	return (str);
 }
 
-char *read_from_file(char *save,int fd)
+char	*read_from_file(char *save, int fd)
 {
-	char		*buff;
-	ssize_t		readed;
+	char	*buff;
+	ssize_t	readed;
 
 	readed = 1;
 	buff = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
@@ -84,7 +84,7 @@ char *read_from_file(char *save,int fd)
 		buff[readed] = '\0';
 		save = ft_strjoin(save, buff);
 		if (ft_strchr(buff, '\n'))
-			break;
+			break ;
 	}
 	free(buff);
 	return (save);
@@ -94,7 +94,7 @@ char	*get_next_line(int fd)
 {
 	static char	*save;
 	char		*line;
-	
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	save = read_from_file(save, fd);
@@ -106,4 +106,3 @@ char	*get_next_line(int fd)
 		free(save);
 	return (line);
 }
-

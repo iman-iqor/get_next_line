@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 20:55:45 by imiqor            #+#    #+#             */
-/*   Updated: 2024/11/29 21:10:34 by imiqor           ###   ########.fr       */
+/*   Updated: 2024/11/29 23:14:07 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,9 @@ char	*ft_strjoin(char *save, char *buff)
 	str = malloc(len + 1);
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (save[i] && i < ft_strlen(save))
-	{
+	i = -1;
+	while (save[++i] && i < ft_strlen(save))
 		str[i] = save[i];
-		i++;
-	}
 	j = 0;
 	while (buff[j] && j < ft_strlen(buff))
 		str[i++] = buff[j++];
